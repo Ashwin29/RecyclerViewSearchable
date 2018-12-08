@@ -1,9 +1,9 @@
 package com.winision.sampleapp;
 
+
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +20,8 @@ implements Filterable {
     private List<Modal> users;
     private List<Modal> usersFiltered;
     private Context context;
+    private int originalHeight = 0;
+    private boolean isCardExpanded = false;
 
     public static class DataViewHolder extends RecyclerView.ViewHolder {
 
@@ -47,10 +49,33 @@ implements Filterable {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DataAdapter.DataViewHolder dataViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final DataAdapter.DataViewHolder dataViewHolder, int i) {
         final Modal modal = usersFiltered.get(i);
         dataViewHolder.titleTxt.setText(modal.getTitle());
         dataViewHolder.details.setText(modal.getBody());
+
+        if (isCardExpanded == false) {
+            dataViewHolder.titleTxt.setVisibility(View.GONE);
+        }
+
+        dataViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (originalHeight == 0) {
+                    originalHeight = view.getHeight();
+                }
+
+                if (!isCardExpanded) {
+                    isCardExpanded = true;
+                    dataViewHolder.titleTxt.setVisibility(View.VISIBLE);
+                } else {
+                    isCardExpanded = false;
+                    dataViewHolder.titleTxt.setVisibility(View.GONE);
+                }
+
+            }
+        });
+
     }
 
     @Override

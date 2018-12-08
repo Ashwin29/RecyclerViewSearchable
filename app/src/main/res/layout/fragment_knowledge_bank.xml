@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.users.KnowledgeBank">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tablayoutKB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabGravity="fill"
+            app:tabMode="fixed">
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/pdfTab"
+                style="@style/tab_item"
+                android:text="PDF" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/videoTab"
+                style="@style/tab_item"
+                android:text="Videos" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/imagesTab"
+                style="@style/tab_item"
+                android:text="Images" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/notesTab"
+                style="@style/tab_item"
+                android:text="Notes" />
+
+        </android.support.design.widget.TabLayout>
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPagerKB"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tablayoutKB"
+            android:layout_alignParentBottom="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+    </RelativeLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

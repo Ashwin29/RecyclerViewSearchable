@@ -1,40 +1,60 @@
-package com.winision.sampleapp;
+package com.winision.sampleapp.ui.users;
 
 import android.app.SearchManager;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.SearchView;
 
-import java.util.ArrayList;
+import com.winision.sampleapp.ApiInterface;
+import com.winision.sampleapp.Client;
+import com.winision.sampleapp.DataAdapter;
+import com.winision.sampleapp.Modal;
+import com.winision.sampleapp.R;
+import com.winision.sampleapp.TabbedActivity;
+
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class UsersFragment extends Fragment {
 
     private SearchView searchView;
     private DataAdapter dataAdapter;
 
+    public static UsersFragment newInstance() {
+        return new UsersFragment();
+    }
 
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+
+        setHasOptionsMenu(true);
+        View view = inflater.inflate(R.layout.users_fragment, container, false);
         ApiInterface apiClient = Client.getClient().create(ApiInterface.class);
         Call<List<Modal>> call = apiClient.getUserData();
 
 
-        final RecyclerView recyclerView = findViewById(R.id.listView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        final RecyclerView recyclerView = view.findViewById(R.id.listView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
-        dataAdapter = new DataAdapter(this);
+        dataAdapter = new DataAdapter(this.getActivity());
         recyclerView.setAdapter(dataAdapter);
 
         call.enqueue(new Callback<List<Modal>>() {
@@ -49,17 +69,22 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        return view;
     }
 
-   @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search_menu, menu);
 
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.search_menu, menu);
+
+        // setHasOptionsMenu(true);
+
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        //new SearchView(((MainActivity) mContext).getSupportActionBar().getThemedContext());
         searchView = (SearchView) menu.findItem(R.id.search)
                 .getActionView();
 
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
         searchView.setMaxWidth(Integer.MAX_VALUE);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -75,15 +100,15 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.search) {
+        if (id == R.id.search) {
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
 }
