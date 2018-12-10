@@ -8,47 +8,41 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.winision.sampleapp.ui.users.Contacts;
 import com.winision.sampleapp.ui.users.KnowledgeBank;
+import com.winision.sampleapp.ui.users.Profile_Fragment;
 
 public class TabbedActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
     private ActionBar toolBar;
-
+    private static final String FRAGEMENT_HOME = "HOME";
+    private static final String OTHER_FRAGMENT = "OTHERS";
+    private BottomNavigationView navigation;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment fragment;
             switch (item.getItemId()) {
                 case R.id.navigation_contacts:
                     toolBar.setTitle("Contacts");
-                    fragment = new Contacts();
-                    loadFragment(fragment);
+                    loadFragment(new Contacts(), FRAGEMENT_HOME);
                     return true;
                 case R.id.navigation_profile:
                     toolBar.setTitle("Profile");
-                    fragment = new Profile_Fragment();
-                    loadFragment(fragment);
+                    loadFragment(new Profile_Fragment(), OTHER_FRAGMENT);
                     return true;
                 case R.id.navigation_kb:
                     toolBar.setTitle("Knowledge Bank");
-                    fragment = new KnowledgeBank();
-                    loadFragment(fragment);
+                    loadFragment(new KnowledgeBank(), OTHER_FRAGMENT);
                     return true;
                 default:
-                    toolBar.setTitle("Contacts");
-                    fragment = new Contacts();
-                    loadFragment(fragment);
-                    break;
+                    return false;
             }
-            return false;
         }
     };
 
@@ -60,19 +54,43 @@ public class TabbedActivity extends AppCompatActivity {
         toolBar = getSupportActionBar();
 
         toolBar.setTitle("XR Assist");
+        toolBar.setDisplayShowHomeEnabled(true);
+        /*toolBar.setLogo(R.drawable.dummy_logo);
+        toolBar.setDisplayUseLogoEnabled(true);
+        toolBar.setDisplayShowTitleEnabled(true);*/
 
         mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
     }
 
-    private void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = getSupportFragmentManager()
-                .beginTransaction();
-        transaction.replace(R.id.frameLayout, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+    private void loadFragment(Fragment fragment, String name) {
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frameLayout, fragment);
+
+        final int count = fragmentManager.getBackStackEntryCount();
+
+        if (name.equals(OTHER_FRAGMENT)) {
+            fragmentTransaction.addToBackStack(name);
+        }
+
+        fragmentTransaction.commit();
+
+        fragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+
+                if (fragmentManager.getBackStackEntryCount() <= count) {
+                    fragmentManager.popBackStack(OTHER_FRAGMENT, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    fragmentManager.removeOnBackStackChangedListener(this);
+
+                    navigation.getMenu().getItem(0).setChecked(true);
+                }
+
+            }
+        });
 
     }
 

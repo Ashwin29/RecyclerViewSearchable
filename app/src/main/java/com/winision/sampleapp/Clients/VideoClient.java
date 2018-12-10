@@ -1,15 +1,15 @@
-package com.winision.sampleapp;
+package com.winision.sampleapp.Clients;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+public class VideoClient {
 
-public class NotesClient {
 
     public static final String BASE_URL = "https://jsonplaceholder.typicode.com/";
     private static Retrofit retrofit = null;
 
-    public static Retrofit getNotesClient() {
+    public static Retrofit getVideosClient() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)

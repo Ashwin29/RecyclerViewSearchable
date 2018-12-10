@@ -10,9 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.winision.sampleapp.ApiInterface;
-import com.winision.sampleapp.ImageAdapter;
-import com.winision.sampleapp.ImageClient;
-import com.winision.sampleapp.ImagesModal;
+import com.winision.sampleapp.Adapters.ImageAdapter;
+import com.winision.sampleapp.Clients.ImageClient;
+import com.winision.sampleapp.Modals.ImagesModal;
 import com.winision.sampleapp.R;
 
 import java.util.List;

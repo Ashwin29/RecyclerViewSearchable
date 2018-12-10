@@ -10,9 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.winision.sampleapp.ApiInterface;
-import com.winision.sampleapp.NotesAdapter;
-import com.winision.sampleapp.NotesClient;
-import com.winision.sampleapp.NotesModal;
+import com.winision.sampleapp.Adapters.NotesAdapter;
+import com.winision.sampleapp.Clients.NotesClient;
+import com.winision.sampleapp.Modals.NotesModal;
 import com.winision.sampleapp.R;
 
 import java.util.List;

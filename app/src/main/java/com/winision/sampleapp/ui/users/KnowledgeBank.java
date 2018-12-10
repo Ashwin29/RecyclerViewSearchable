@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -90,23 +91,19 @@ public class KnowledgeBank extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Fragment fragment;
+
         switch (item.getItemId()) {
             case R.id.navigation_pdf:
-                fragment = new PDF_Fragment();
-                loadFragment(fragment);
+                loadFragment(new PDF_Fragment());
                 return true;
             case R.id.navigation_videos:
-                fragment = new Videos_Fragment();
-                loadFragment(fragment);
+                loadFragment(new Videos_Fragment());
                 return true;
             case R.id.navigation_images:
-                fragment = new Images_Fragment();
-                loadFragment(fragment);
+                loadFragment(new Images_Fragment());
                 return true;
             case R.id.navigation_notes:
-                fragment = new Notes_Fragment();
-                loadFragment(fragment);
+                loadFragment(new Notes_Fragment());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -133,10 +130,11 @@ public class KnowledgeBank extends Fragment {
 
 
     private void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = getChildFragmentManager()
-                .beginTransaction();
-        transaction.addToBackStack(null);
-        transaction.commit();
+        final FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frameLayout, fragment);
+
+        fragmentTransaction.commit();
     }
 
 

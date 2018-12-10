@@ -1,4 +1,4 @@
-package com.winision.sampleapp;
+package com.winision.sampleapp.Adapters;
 
 
 import android.content.Context;
@@ -9,7 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.winision.sampleapp.Modals.Modal;
+import com.winision.sampleapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,39 +27,15 @@ implements Filterable {
     private int originalHeight = 0;
     private boolean isCardExpanded = false;
 
-    public static class DataViewHolder extends RecyclerView.ViewHolder {
-
-        TextView titleTxt;
-        TextView details;
-
-        public DataViewHolder(@NonNull View itemView) {
-            super(itemView);
-            titleTxt = itemView.findViewById(R.id.emailTxt);
-            details = itemView.findViewById(R.id.nameTxt);
-        }
-    }
-
-    public DataAdapter(Context context) {
-        this.users = new ArrayList<>();
-        this.usersFiltered = new ArrayList();
-        this.context = context;
-    }
-
-    @NonNull
-    @Override
-    public DataAdapter.DataViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cardholder,  viewGroup, false);
-        return new DataViewHolder(view);
-    }
-
     @Override
     public void onBindViewHolder(@NonNull final DataAdapter.DataViewHolder dataViewHolder, int i) {
         final Modal modal = usersFiltered.get(i);
-        dataViewHolder.titleTxt.setText(modal.getTitle());
-        dataViewHolder.details.setText(modal.getBody());
+        dataViewHolder.nameTxt.setText(modal.getName());
 
         if (isCardExpanded == false) {
-            dataViewHolder.titleTxt.setVisibility(View.GONE);
+            dataViewHolder.briefTxt.setVisibility(View.GONE);
+            dataViewHolder.callBrief.setVisibility(View.GONE);
+            dataViewHolder.infoIcon.setVisibility(View.GONE);
         }
 
         dataViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -67,10 +47,15 @@ implements Filterable {
 
                 if (!isCardExpanded) {
                     isCardExpanded = true;
-                    dataViewHolder.titleTxt.setVisibility(View.VISIBLE);
+                    dataViewHolder.briefTxt.setVisibility(View.VISIBLE);
+                    dataViewHolder.callBrief.setVisibility(View.VISIBLE);
+                    dataViewHolder.infoIcon.setVisibility(View.VISIBLE);
+
                 } else {
                     isCardExpanded = false;
-                    dataViewHolder.titleTxt.setVisibility(View.GONE);
+                    dataViewHolder.briefTxt.setVisibility(View.GONE);
+                    dataViewHolder.callBrief.setVisibility(View.GONE);
+                    dataViewHolder.infoIcon.setVisibility(View.GONE);
                 }
 
             }
@@ -78,15 +63,17 @@ implements Filterable {
 
     }
 
-    @Override
-    public int getItemCount() {
-        return usersFiltered.size();
+    public DataAdapter(Context context) {
+        this.users = new ArrayList<>();
+        this.usersFiltered = new ArrayList();
+        this.context = context;
     }
 
-    public void addData(List<Modal> data) {
-        users.addAll(data);
-        this.usersFiltered = users;
-        notifyDataSetChanged();
+    @NonNull
+    @Override
+    public DataAdapter.DataViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cardholder, viewGroup, false);
+        return new DataViewHolder(view);
     }
 
     @Override
@@ -101,7 +88,7 @@ implements Filterable {
                     List<Modal> filteredList = new ArrayList<>();
                     for (Modal row: users) {
                         if(row.getTitle().toLowerCase().contains(searchString.toLowerCase())
-                                || row.getBody().toLowerCase().contains(searchString.toLowerCase())) {
+                                || row.getName().toLowerCase().contains(searchString.toLowerCase())) {
                             filteredList.add(row);
                         }
                     }
@@ -121,5 +108,33 @@ implements Filterable {
                 notifyDataSetChanged();
             }
         };
+    }
+
+    @Override
+    public int getItemCount() {
+        return usersFiltered.size();
+    }
+
+    public void addData(List<Modal> data) {
+        users.addAll(data);
+        this.usersFiltered = users;
+        notifyDataSetChanged();
+    }
+
+    public static class DataViewHolder extends RecyclerView.ViewHolder {
+
+        TextView briefTxt;
+        TextView nameTxt;
+        TextView callBrief;
+
+        ImageView infoIcon;
+
+        public DataViewHolder(@NonNull View itemView) {
+            super(itemView);
+            briefTxt = itemView.findViewById(R.id.briefTxt);
+            nameTxt = itemView.findViewById(R.id.nameTxt);
+            callBrief = itemView.findViewById(R.id.callBrief);
+            infoIcon = itemView.findViewById(R.id.infoIcon);
+        }
     }
 }

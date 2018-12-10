@@ -1,4 +1,4 @@
-package com.winision.sampleapp;
+package com.winision.sampleapp.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+import com.winision.sampleapp.Modals.ImagesModal;
+import com.winision.sampleapp.R;
 
 import java.util.ArrayList;
 import java.util.List;

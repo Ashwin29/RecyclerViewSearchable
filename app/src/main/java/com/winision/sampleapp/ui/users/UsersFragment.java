@@ -1,7 +1,6 @@
 package com.winision.sampleapp.ui.users;
 
 import android.app.SearchManager;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,11 +17,10 @@ import android.view.ViewGroup;
 import android.widget.SearchView;
 
 import com.winision.sampleapp.ApiInterface;
-import com.winision.sampleapp.Client;
-import com.winision.sampleapp.DataAdapter;
-import com.winision.sampleapp.Modal;
+import com.winision.sampleapp.Clients.Client;
+import com.winision.sampleapp.Adapters.DataAdapter;
+import com.winision.sampleapp.Modals.Modal;
 import com.winision.sampleapp.R;
-import com.winision.sampleapp.TabbedActivity;
 
 import java.util.List;
 

@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -23,6 +24,10 @@ public class Contacts extends Fragment {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ActionBar toolbar;
+
+    private static final String PAGER_HOME = "Contacts";
+    private static final String PAGER_OTHER = "others";
+
 
     public Contacts() {
         // Required empty public constructor
@@ -89,17 +94,15 @@ public class Contacts extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        Fragment fragment;
 
         switch (item.getItemId()) {
             case R.id.navigation_users:
-                toolbar.setTitle("Users");
-                fragment = new Contacts();
-                loadFragment(fragment);
+                toolbar.setTitle("Recent Calls");
+                loadFragment(new Contacts(), PAGER_HOME);
                 return true;
             case R.id.navigation_calls:
-                toolbar.setTitle("Calls");
-                Toast.makeText(getContext(), "Calls Tab selected", Toast.LENGTH_LONG).show();
+                toolbar.setTitle("Expert List");
+                loadFragment(new Calls_Fragment(), PAGER_OTHER);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -118,12 +121,33 @@ public class Contacts extends Fragment {
         viewPager.setAdapter(viewPagerAdapterContacts);
     }
 
-    private void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = getChildFragmentManager()
-                .beginTransaction();
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
+    private void loadFragment(Fragment fragment, String name) {
+        final FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frameLayout, fragment);
 
+        final int count = fragmentManager.getBackStackEntryCount();
+
+        if (name.equals(PAGER_OTHER)) {
+            fragmentTransaction.addToBackStack(name);
+        }
+
+        fragmentTransaction.commit();
+
+        fragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+
+                if (fragmentManager.getBackStackEntryCount() <= count) {
+                    fragmentManager.popBackStack(PAGER_OTHER, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    fragmentManager.removeOnBackStackChangedListener(this);
+
+                    //  viewPager.getTag().getItem(0).setChecked(true);
+                }
+
+            }
+        });
+
+    }
 
 }

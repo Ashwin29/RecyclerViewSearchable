@@ -1,4 +1,4 @@
-package com.winision.sampleapp;
+package com.winision.sampleapp.Modals;
 
 public class NotesModal {
 
