@@ -2,6 +2,7 @@ package com.winision.sampleapp;
 
 import com.winision.sampleapp.Modals.ImagesModal;
 import com.winision.sampleapp.Modals.Modal;
+import com.winision.sampleapp.Modals.ModelModal;
 import com.winision.sampleapp.Modals.NotesModal;
 import com.winision.sampleapp.Modals.ProductModal;
 import com.winision.sampleapp.Modals.VideoModal;
@@ -30,5 +31,8 @@ public interface ApiInterface {
 
     @GET("todos/")
     Call<List<ProductModal>> getProductData();
+
+    @GET("todos/")
+    Call<List<ModelModal>> getModelData();
 
 }
