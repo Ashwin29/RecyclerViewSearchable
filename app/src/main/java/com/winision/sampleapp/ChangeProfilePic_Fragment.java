@@ -1,4 +1,4 @@
-package com.winision.sampleapp.ui.users;
+package com.winision.sampleapp;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,21 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.winision.sampleapp.R;
 
-
-public class Calls_Fragment extends Fragment {
-
-
-    public Calls_Fragment() {
-        // Required empty public constructor
-    }
-
+public class ChangeProfilePic_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_calls_, container, false);
+        View view = inflater.inflate(R.layout.fragment_change_profile_pic_, container, false);
+
 
         return view;
     }

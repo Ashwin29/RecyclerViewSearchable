@@ -13,14 +13,16 @@ import android.widget.TextView;
 
 import com.winision.sampleapp.ui.users.Contacts;
 import com.winision.sampleapp.ui.users.KnowledgeBank;
-import com.winision.sampleapp.ui.users.Profile_Fragment;
 
 public class TabbedActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
     private ActionBar toolBar;
+    private Contacts contacts;
     private static final String FRAGEMENT_HOME = "HOME";
     private static final String OTHER_FRAGMENT = "OTHERS";
+
+
     private BottomNavigationView navigation;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -51,16 +53,19 @@ public class TabbedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabbed);
 
+        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         toolBar = getSupportActionBar();
 
-        toolBar.setTitle("XR Assist");
-        toolBar.setDisplayShowHomeEnabled(true);
-        /*toolBar.setLogo(R.drawable.dummy_logo);
         toolBar.setDisplayUseLogoEnabled(true);
-        toolBar.setDisplayShowTitleEnabled(true);*/
+        toolBar.setDisplayShowTitleEnabled(true);
+        toolBar.setLogo(R.drawable.logo);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
-        navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        toolBar.setDisplayShowHomeEnabled(true);
+
+
+        mTextMessage = findViewById(R.id.message);
+        navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
     }
@@ -87,11 +92,10 @@ public class TabbedActivity extends AppCompatActivity {
                     fragmentManager.removeOnBackStackChangedListener(this);
 
                     navigation.getMenu().getItem(0).setChecked(true);
+                    toolBar.setTitle("Contacts");
                 }
-
             }
         });
 
     }
-
 }

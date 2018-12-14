@@ -2,8 +2,11 @@ package com.winision.sampleapp.Adapters;
 
 
 import android.content.Context;
+import android.media.Image;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +14,11 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.winision.sampleapp.Modals.Modal;
 import com.winision.sampleapp.R;
+import com.winision.sampleapp.TabbedActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +37,19 @@ implements Filterable {
         final Modal modal = usersFiltered.get(i);
         dataViewHolder.nameTxt.setText(modal.getName());
 
-        if (isCardExpanded == false) {
-            dataViewHolder.briefTxt.setVisibility(View.GONE);
+        if (!isCardExpanded) {
+
             dataViewHolder.callBrief.setVisibility(View.GONE);
+            dataViewHolder.briefTxt.setVisibility(View.GONE);
+            dataViewHolder.callLogs.setVisibility(View.GONE);
+            dataViewHolder.timeStamps.setVisibility(View.GONE);
+            dataViewHolder.sharedItems.setVisibility(View.GONE);
+
             dataViewHolder.infoIcon.setVisibility(View.GONE);
+            dataViewHolder.callsIcon.setVisibility(View.GONE);
+            dataViewHolder.shareIcon.setVisibility(View.GONE);
+            dataViewHolder.attachments.setVisibility(View.GONE);
+
         }
 
         dataViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -46,21 +60,68 @@ implements Filterable {
                 }
 
                 if (!isCardExpanded) {
-                    isCardExpanded = true;
-                    dataViewHolder.briefTxt.setVisibility(View.VISIBLE);
+
                     dataViewHolder.callBrief.setVisibility(View.VISIBLE);
+                    dataViewHolder.briefTxt.setVisibility(View.VISIBLE);
+                    dataViewHolder.callLogs.setVisibility(View.VISIBLE);
+                    dataViewHolder.timeStamps.setVisibility(View.VISIBLE);
+                    dataViewHolder.sharedItems.setVisibility(View.VISIBLE);
+
                     dataViewHolder.infoIcon.setVisibility(View.VISIBLE);
+                    dataViewHolder.callsIcon.setVisibility(View.VISIBLE);
+                    dataViewHolder.shareIcon.setVisibility(View.VISIBLE);
+                    dataViewHolder.attachments.setVisibility(View.VISIBLE);
+                    isCardExpanded = true;
 
                 } else {
                     isCardExpanded = false;
-                    dataViewHolder.briefTxt.setVisibility(View.GONE);
+
                     dataViewHolder.callBrief.setVisibility(View.GONE);
+                    dataViewHolder.briefTxt.setVisibility(View.GONE);
+                    dataViewHolder.callLogs.setVisibility(View.GONE);
+                    dataViewHolder.timeStamps.setVisibility(View.GONE);
+                    dataViewHolder.sharedItems.setVisibility(View.GONE);
+
                     dataViewHolder.infoIcon.setVisibility(View.GONE);
+                    dataViewHolder.callsIcon.setVisibility(View.GONE);
+                    dataViewHolder.shareIcon.setVisibility(View.GONE);
+                    dataViewHolder.attachments.setVisibility(View.GONE);
+
                 }
 
             }
         });
 
+    }
+
+    public static class DataViewHolder extends RecyclerView.ViewHolder {
+
+        TextView nameTxt;
+        TextView callBrief;
+        TextView briefTxt;
+        TextView callLogs;
+        TextView timeStamps;
+        TextView sharedItems;
+
+        ImageView infoIcon;
+        ImageView callsIcon;
+        ImageView shareIcon;
+        ImageView attachments;
+
+        public DataViewHolder(@NonNull View itemView) {
+            super(itemView);
+            nameTxt = itemView.findViewById(R.id.nameTxt);
+            callBrief = itemView.findViewById(R.id.callBrief);
+            briefTxt = itemView.findViewById(R.id.briefTxt);
+            callLogs = itemView.findViewById(R.id.callLogs);
+            timeStamps = itemView.findViewById(R.id.timeStamps);
+            sharedItems = itemView.findViewById(R.id.sharedItems);
+
+            infoIcon = itemView.findViewById(R.id.infoIcon);
+            callsIcon = itemView.findViewById(R.id.callsIcon);
+            shareIcon = itemView.findViewById(R.id.shareIcon);
+            attachments = itemView.findViewById(R.id.attachments);
+        }
     }
 
     public DataAdapter(Context context) {
@@ -119,22 +180,5 @@ implements Filterable {
         users.addAll(data);
         this.usersFiltered = users;
         notifyDataSetChanged();
-    }
-
-    public static class DataViewHolder extends RecyclerView.ViewHolder {
-
-        TextView briefTxt;
-        TextView nameTxt;
-        TextView callBrief;
-
-        ImageView infoIcon;
-
-        public DataViewHolder(@NonNull View itemView) {
-            super(itemView);
-            briefTxt = itemView.findViewById(R.id.briefTxt);
-            nameTxt = itemView.findViewById(R.id.nameTxt);
-            callBrief = itemView.findViewById(R.id.callBrief);
-            infoIcon = itemView.findViewById(R.id.infoIcon);
-        }
     }
 }

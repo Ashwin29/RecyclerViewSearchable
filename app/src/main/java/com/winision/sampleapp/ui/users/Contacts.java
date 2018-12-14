@@ -2,6 +2,7 @@ package com.winision.sampleapp.ui.users;
 
 import android.app.ActionBar;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.winision.sampleapp.OnBackPressedListener;
 import com.winision.sampleapp.R;
 import com.winision.sampleapp.ViewPagerAdapterContacts;
 
@@ -22,10 +24,10 @@ public class Contacts extends Fragment {
     UsersFragment users_fragment;
     Calls_Fragment calls_fragment;
     private TabLayout tabLayout;
-    private ViewPager viewPager;
+    private static final String PAGER_HOME = "Calls";
     private ActionBar toolbar;
-
-    private static final String PAGER_HOME = "Contacts";
+    public ViewPager viewPager;
+    private FloatingActionButton backCheck;
     private static final String PAGER_OTHER = "others";
 
 
@@ -51,6 +53,15 @@ public class Contacts extends Fragment {
         toolbar = getActivity().getActionBar();
 
         setupViewPager(viewPager);
+
+        backCheck = view.findViewById(R.id.backCheck);
+
+        backCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                back();
+            }
+        });
 
         tabLayout = view.findViewById(R.id.tablayoutContacts);
 
@@ -91,25 +102,10 @@ public class Contacts extends Fragment {
         return view;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
 
-
-        switch (item.getItemId()) {
-            case R.id.navigation_users:
-                toolbar.setTitle("Recent Calls");
-                loadFragment(new Contacts(), PAGER_HOME);
-                return true;
-            case R.id.navigation_calls:
-                toolbar.setTitle("Expert List");
-                loadFragment(new Calls_Fragment(), PAGER_OTHER);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
     private void setupViewPager(ViewPager viewPager) {
+
         viewPagerAdapterContacts = new ViewPagerAdapterContacts(getChildFragmentManager());
 
         users_fragment = new UsersFragment();
@@ -118,36 +114,15 @@ public class Contacts extends Fragment {
         viewPagerAdapterContacts.addfragment(users_fragment, "XR-Users");
         viewPagerAdapterContacts.addfragment(calls_fragment, "Calls");
 
+
         viewPager.setAdapter(viewPagerAdapterContacts);
+
     }
 
-    private void loadFragment(Fragment fragment, String name) {
-        final FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frameLayout, fragment);
-
-        final int count = fragmentManager.getBackStackEntryCount();
-
-        if (name.equals(PAGER_OTHER)) {
-            fragmentTransaction.addToBackStack(name);
+    private void back() {
+        if (viewPager.getCurrentItem() != 0) {
+            viewPager.setCurrentItem(viewPager.getCurrentItem() - 1, false);
         }
-
-        fragmentTransaction.commit();
-
-        fragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
-            @Override
-            public void onBackStackChanged() {
-
-                if (fragmentManager.getBackStackEntryCount() <= count) {
-                    fragmentManager.popBackStack(PAGER_OTHER, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                    fragmentManager.removeOnBackStackChangedListener(this);
-
-                    //  viewPager.getTag().getItem(0).setChecked(true);
-                }
-
-            }
-        });
-
     }
 
 }

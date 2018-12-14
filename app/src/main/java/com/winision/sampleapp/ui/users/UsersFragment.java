@@ -77,6 +77,7 @@ public class UsersFragment extends Fragment {
 
         // setHasOptionsMenu(true);
 
+
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
         //new SearchView(((MainActivity) mContext).getSupportActionBar().getThemedContext());
         searchView = (SearchView) menu.findItem(R.id.search)

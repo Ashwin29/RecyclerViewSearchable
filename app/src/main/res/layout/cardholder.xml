@@ -17,11 +17,11 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="62.5dp"
+            android:layout_height="62.5dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/img"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,8 +32,8 @@
             android:id="@+id/nameTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/roboto"
             android:text="Name"
             android:textColor="@android:color/black"
             android:textSize="18sp"
@@ -42,66 +42,150 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="37.5dp"
+            android:layout_height="37.5dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/call_36"
+            android:tint="@android:color/darker_gray"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView"
-            app:layout_constraintVertical_bias="0.615" />
+            app:layout_constraintTop_toTopOf="@+id/imageView" />
 
 
         <ImageView
             android:id="@+id/infoIcon"
-            android:layout_width="38dp"
-            android:layout_height="28dp"
-            android:layout_marginTop="40dp"
-            android:cropToPadding="true"
+            android:layout_width="37.5dp"
+            android:layout_height="37.5dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="112dp"
+            android:contentDescription="TODO"
             android:src="@drawable/info"
-            app:layout_constraintEnd_toEndOf="@+id/imageView"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            android:tint="@android:color/darker_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/callBrief"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="28dp"
+            android:fontFamily="@font/roboto"
             android:text="@string/call_brief"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/background_dark"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/briefTxt"
-            app:layout_constraintEnd_toStartOf="@+id/imageView2"
-            app:layout_constraintHorizontal_bias="0.017"
-            app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/nameTxt"
+            app:layout_constraintBottom_toBottomOf="@+id/infoIcon"
+            app:layout_constraintStart_toEndOf="@+id/infoIcon"
+            app:layout_constraintTop_toTopOf="@+id/infoIcon"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/callDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/roboto"
+            android:text="16m27s"
+            app:layout_constraintBottom_toTopOf="@+id/timeStamps"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/callLogs"
+            app:layout_constraintTop_toBottomOf="@+id/briefTxt"
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/briefTxt"
-            android:layout_width="273dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/roboto"
             android:lines="4"
-            android:maxLines="6"
+            android:maxLines="4"
             android:text="@string/random_txt"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.806"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintHorizontal_bias="0.006"
+            app:layout_constraintStart_toStartOf="@+id/infoIcon"
+            app:layout_constraintTop_toBottomOf="@+id/callBrief" />
+
+        <ImageView
+            android:id="@+id/callsIcon"
+            android:layout_width="37.5dp"
+            android:layout_height="37.5dp"
+            android:layout_marginTop="88dp"
+            android:src="@drawable/outgoing_call"
+            app:layout_constraintEnd_toEndOf="@+id/infoIcon"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/infoIcon"
+            app:layout_constraintTop_toBottomOf="@+id/infoIcon" />
+
+
+        <TextView
+            android:id="@+id/callLogs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/callLogs"
+            android:textColor="@android:color/background_dark"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/callsIcon"
+            app:layout_constraintTop_toBottomOf="@+id/briefTxt" />
+
+        <TextView
+            android:id="@+id/timeStamps"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/timestamp"
+            app:layout_constraintEnd_toEndOf="@+id/briefTxt"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/callsIcon"
+            app:layout_constraintTop_toBottomOf="@+id/callLogs" />
+
+        <ImageView
+            android:id="@+id/shareIcon"
+            android:layout_width="37.5dp"
+            android:layout_height="37.5dp"
+            android:layout_marginTop="36dp"
+            android:src="@drawable/icon_share"
+            app:layout_constraintEnd_toEndOf="@+id/callsIcon"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/callsIcon"
+            app:layout_constraintTop_toBottomOf="@+id/callsIcon" />
+
+        <TextView
+            android:id="@+id/sharedItems"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/shared_items"
+            android:textColor="@android:color/background_dark"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/shareIcon"
+            app:layout_constraintTop_toBottomOf="@+id/timeStamps" />
+
+        <ImageView
+            android:id="@+id/attachments"
+            android:layout_width="27.5dp"
+            android:layout_height="27.5dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/attachments"
+            app:layout_constraintEnd_toEndOf="@+id/sharedItems"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/shareIcon"
+            app:layout_constraintTop_toBottomOf="@+id/sharedItems" />
 
     </android.support.constraint.ConstraintLayout>
 

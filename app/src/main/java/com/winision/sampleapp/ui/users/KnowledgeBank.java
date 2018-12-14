@@ -2,15 +2,11 @@ package com.winision.sampleapp.ui.users;
 
 import android.app.ActionBar;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -28,6 +24,7 @@ public class KnowledgeBank extends Fragment {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ActionBar toolbar;
+    private FloatingActionButton backKB;
 
     public KnowledgeBank() {
         // Required empty public constructor
@@ -51,6 +48,15 @@ public class KnowledgeBank extends Fragment {
         setupViewPager(viewPager);
 
         tabLayout = view.findViewById(R.id.tablayoutKB);
+
+        backKB = view.findViewById(R.id.backKB);
+
+        backKB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                back();
+            }
+        });
 
         tabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override
@@ -89,31 +95,10 @@ public class KnowledgeBank extends Fragment {
         return view;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.navigation_pdf:
-                loadFragment(new PDF_Fragment());
-                return true;
-            case R.id.navigation_videos:
-                loadFragment(new Videos_Fragment());
-                return true;
-            case R.id.navigation_images:
-                loadFragment(new Images_Fragment());
-                return true;
-            case R.id.navigation_notes:
-                loadFragment(new Notes_Fragment());
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
 
     private void setupViewPager(ViewPager viewPager) {
         viewPagerAdapterContacts = new ViewPagerAdapterContacts(getChildFragmentManager());
-
 
         pdf_fragment = new PDF_Fragment();
         videos_fragment = new Videos_Fragment();
@@ -128,13 +113,12 @@ public class KnowledgeBank extends Fragment {
         viewPager.setAdapter(viewPagerAdapterContacts);
     }
 
+    private void back() {
 
-    private void loadFragment(Fragment fragment) {
-        final FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frameLayout, fragment);
+        if (viewPager.getCurrentItem() != 0) {
+            viewPager.setCurrentItem(viewPager.getCurrentItem() - 4);
+        }
 
-        fragmentTransaction.commit();
     }
 
 

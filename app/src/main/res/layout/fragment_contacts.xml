@@ -29,6 +29,15 @@
 
         </android.support.design.widget.TabLayout>
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/backCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="39dp"
+            android:layout_marginBottom="36dp" />
+
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
