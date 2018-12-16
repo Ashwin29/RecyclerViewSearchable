@@ -41,4 +41,5 @@
     <string name="gallery">OR slide up for Gallery</string>
 
     <string name="title_activity_camera_preview">CameraPreview</string>
+    <string name="calling_txt">CALLING</string>
 </resources>

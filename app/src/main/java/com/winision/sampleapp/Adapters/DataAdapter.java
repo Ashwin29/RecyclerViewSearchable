@@ -37,7 +37,6 @@ implements Filterable {
         final Modal modal = usersFiltered.get(i);
         dataViewHolder.nameTxt.setText(modal.getName());
 
-
         if (!isCardExpanded) {
 
             dataViewHolder.callBrief.setVisibility(View.GONE);
@@ -95,7 +94,8 @@ implements Filterable {
 
     }
 
-    public static class DataViewHolder extends RecyclerView.ViewHolder {
+    class DataViewHolder extends RecyclerView.ViewHolder implements
+            View.OnClickListener {
 
         TextView nameTxt;
         TextView callBrief;
@@ -104,7 +104,7 @@ implements Filterable {
         TextView timeStamps;
         TextView sharedItems;
 
-        //   ImageView callingBtn;
+        ImageView callingBtn;
 
         ImageView infoIcon;
         ImageView callsIcon;
@@ -120,14 +120,19 @@ implements Filterable {
             timeStamps = itemView.findViewById(R.id.timeStamps);
             sharedItems = itemView.findViewById(R.id.sharedItems);
 
-            //  callingBtn = itemView.findViewById(R.id.callingBtn);
+            callingBtn = itemView.findViewById(R.id.callingBtn);
 
-            //  callingBtn.setOnClickListener(this);
+            itemView.setOnClickListener(this);
 
             infoIcon = itemView.findViewById(R.id.infoIcon);
             callsIcon = itemView.findViewById(R.id.callsIcon);
             shareIcon = itemView.findViewById(R.id.shareIcon);
             attachments = itemView.findViewById(R.id.attachments);
+        }
+
+        @Override
+        public void onClick(View view) {
+
         }
     }
 

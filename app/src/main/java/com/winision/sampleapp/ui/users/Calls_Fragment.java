@@ -13,7 +13,7 @@ public class Calls_Fragment extends Fragment {
 
 
     public Calls_Fragment() {
-        // Required empty public constructor
+
     }
 
     @Override
