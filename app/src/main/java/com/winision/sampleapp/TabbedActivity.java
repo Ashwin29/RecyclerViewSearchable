@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.winision.sampleapp.ui.users.Contacts;
 import com.winision.sampleapp.ui.users.KnowledgeBank;
+import com.winision.sampleapp.ui.users.Profile_Fragment;
 
 public class TabbedActivity extends AppCompatActivity {
 

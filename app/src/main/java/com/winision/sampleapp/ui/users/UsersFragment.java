@@ -12,9 +12,12 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.winision.sampleapp.ApiInterface;
 import com.winision.sampleapp.Clients.Client;
@@ -54,6 +57,7 @@ public class UsersFragment extends Fragment {
 
         dataAdapter = new DataAdapter(this.getActivity());
         recyclerView.setAdapter(dataAdapter);
+
 
         call.enqueue(new Callback<List<Modal>>() {
             @Override

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:id="@+id/closeCamImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/icon_close"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/camHintTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/cam_hint"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/closeCamImg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/closeCamImg"
+        app:layout_constraintTop_toTopOf="@+id/closeCamImg"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:src="@drawable/circle_border"
+        app:layout_constraintBottom_toBottomOf="@+id/cameraIcon"
+        app:layout_constraintEnd_toEndOf="@+id/cameraIcon"
+        app:layout_constraintStart_toStartOf="@+id/cameraIcon"
+        app:layout_constraintTop_toTopOf="@+id/cameraIcon" />
+
+    <ImageView
+        android:id="@+id/cameraIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="164dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/icon_camera"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/camHintTxt"
+        app:layout_constraintVertical_bias="0.19" />
+
+
+    <TextView
+        android:id="@+id/slideupTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="41dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/gallery"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/cameraIcon"
+        app:layout_constraintStart_toStartOf="@+id/cameraIcon" />
+
+
+</android.support.constraint.ConstraintLayout>

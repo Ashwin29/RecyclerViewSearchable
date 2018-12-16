@@ -3,6 +3,7 @@
     package="com.winision.sampleapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -12,8 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:configChanges="orientation|screenSize|keyboardHidden"
             android:name=".TabbedActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/title_activity_tabbed">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +22,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ChangeProfilePic"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_change_profile_pic"
+            android:theme="@style/ChangeProfilePic" />
+        <activity
+            android:name=".Calling"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_calling"
+            android:theme="@style/ChangeProfilePic" />
+        <activity
+            android:name=".CameraPreview"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_camera_preview"
+            android:theme="@style/ChangeProfilePic"></activity>
     </application>
 
 </manifest>

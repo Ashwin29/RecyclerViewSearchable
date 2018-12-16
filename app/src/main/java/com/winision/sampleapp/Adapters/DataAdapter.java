@@ -37,6 +37,7 @@ implements Filterable {
         final Modal modal = usersFiltered.get(i);
         dataViewHolder.nameTxt.setText(modal.getName());
 
+
         if (!isCardExpanded) {
 
             dataViewHolder.callBrief.setVisibility(View.GONE);
@@ -103,6 +104,8 @@ implements Filterable {
         TextView timeStamps;
         TextView sharedItems;
 
+        //   ImageView callingBtn;
+
         ImageView infoIcon;
         ImageView callsIcon;
         ImageView shareIcon;
@@ -116,6 +119,10 @@ implements Filterable {
             callLogs = itemView.findViewById(R.id.callLogs);
             timeStamps = itemView.findViewById(R.id.timeStamps);
             sharedItems = itemView.findViewById(R.id.sharedItems);
+
+            //  callingBtn = itemView.findViewById(R.id.callingBtn);
+
+            //  callingBtn.setOnClickListener(this);
 
             infoIcon = itemView.findViewById(R.id.infoIcon);
             callsIcon = itemView.findViewById(R.id.callsIcon);
